@@ -1,9 +1,11 @@
+import time
 class Student():
     def __init__(self, surname, name, qreat):
         self.surname = surname
         self.name = name
         self.qreat = qreat
 
+start_time = time.time()
 student = []
 
 with open("sts.txt", encoding="utf-8") as file:
@@ -30,7 +32,10 @@ for s in student:
         ss += 1
     medium = round(suma / ss, 1)
 
+end_time = time.time()
+total_time = round(end_time - start_time, 4)
 print('Загальна кількість балів:', suma)
 print('Кількість студентів:', pt)
 print('Середнє арифметичне:', medium)
+print("Час виконання програми:", total_time, "секунд")
 
