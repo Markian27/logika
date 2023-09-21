@@ -28,10 +28,9 @@ for s in student:
     if s.qreat == 2:
         suma += 2
         ss += 1
-    medium = suma / ss
+    medium = round(suma / ss, 1)
 
 print('Загальна кількість балів:', suma)
-print('Середнє арифметичне:', medium)
 print('Кількість студентів:', pt)
-
+print('Середнє арифметичне:', medium)
 
