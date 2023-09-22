@@ -25,10 +25,10 @@ line1.addWidget(file_text)
 id_notes = QLabel('Список заміток ')
 line2.addWidget(id_notes)
 
-lmt_notes = QLineEdit()
-line2.addWidget(lmt_notes)
+lst_notes = QListWidget()
+line2.addWidget(lst_notes)
 
-lst_notes = QLabel('Список тегів ')
+lmt_notes = QLabel('Список тегів ')
 
 
 
@@ -39,11 +39,15 @@ btn_add_notes = QPushButton('Додати до замітки')
 btn_unpin_notes = QPushButton('Відкріпити замітку')
 btn_search_notes = QPushButton('Шукати замітку за тегом')
 
+def show_notes():
+    key = lst_notes.selectedItems()[0].text()
+    file_text.setText(notes[key]['текст'])
+
 
 with open("notes.json", 'r', encoding="utf-8") as file:
     notes = json.load(file)
 
-
+lst_notes.addItem(notes)
 
 window.setLayout(layout_notes)
 window.setLayout(line1)
