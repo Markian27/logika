@@ -1,10 +1,10 @@
+import json
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QTextEdit, QLabel,
     QListWidget, QPushButton, QLineEdit, QHBoxLayout, QVBoxLayout, QInputDialog,
     QTableWidget,  QListWidgetItem, QFormLayout,
     QGroupBox, QButtonGroup, QRadioButton, QSpinBox)
-import json
 
 app = QApplication([])
 window = QWidget()
@@ -16,6 +16,7 @@ layout_notes = QHBoxLayout()
 
 layout_notes.addLayout(line1, stretch=2)
 layout_notes.addLayout(line2, stretch=1)
+
 
 line_x1 = QHBoxLayout()
 line_x2 = QHBoxLayout()
@@ -41,11 +42,11 @@ btn_save_notes = QPushButton('Зберегти замітку')
 line2.addWidget(btn_save_notes)
 
 
-lmt_notes = QLabel('Список тегів ')
-line2.addWidget(lmt_notes)
+tags_notes = QLabel('Список тегів ')
+line2.addWidget(tags_notes)
 
-lpt_notes = QListWidget()
-line2.addWidget(lpt_notes)
+tag_notes = QListWidget()
+line2.addWidget(tag_notes)
 
 btn_add_notes = QPushButton('Додати до замітки')
 line_x2.addWidget(btn_add_notes)
@@ -58,12 +59,18 @@ def show_notes():
     key = lst_notes.selectedItems()[0].text()
     file_text.setText(notes[key]['текст'])
 
+def show_tags():
+    tags = lst_notes.selectedItems()[0].text()
 
-with open("notes.json", 'r', encoding="utf-8") as file:
+with open("notes.json", 'r', encoding="utf8") as file:
     notes = json.load(file)
+
 
 lst_notes.addItems(notes)
 lst_notes.clicked.connect(show_notes)
+
+tag_notes.addItems(notes)
+#tag_notes.clicked.connect(show_tags)
 
 window.setLayout(layout_notes)
 window.setLayout(line1)
