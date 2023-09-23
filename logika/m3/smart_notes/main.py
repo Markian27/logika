@@ -62,7 +62,8 @@ def show_notes():
 with open("notes.json", 'r', encoding="utf-8") as file:
     notes = json.load(file)
 
-#lst_notes.addItem(notes)
+lst_notes.addItems(notes)
+lst_notes.clicked.connect(show_notes)
 
 window.setLayout(layout_notes)
 window.setLayout(line1)
