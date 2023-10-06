@@ -64,26 +64,25 @@ line_x5.addWidget(tag_notes)
 line_edit = QLineEdit()
 line_x6.addWidget(line_edit)
 
-btn_add_notes = QPushButton('Додати до замітки')
-line_x8.addWidget(btn_add_notes)
-btn_unpin_notes = QPushButton('Відкріпити замітку')
-line_x8.addWidget(btn_unpin_notes)
-btn_search_notes = QPushButton('Шукати замітку за тегом')
-line_x7.addWidget(btn_search_notes)
+btn_add_tag = QPushButton('Додати тег')
+line_x8.addWidget(btn_add_tag)
+btn_unpin_tag = QPushButton('Відкріпити тег')
+line_x8.addWidget(btn_unpin_tag)
+btn_search_tag = QPushButton('Шукати за тегом')
+line_x7.addWidget(btn_search_tag)
 
 def show_notes():
     key = lst_notes.selectedItems()[0].text()
     file_text.setText(notes[key]['текст'])
 
-    #lst_tags.clear()
-    #lst_tags.addItems(notes[key]['теги'])
+    tag_notes.clear()
+    tag_notes.addItems(notes[key]['теги'])
 
 def add_note():
     note_name, ok = QInputDialog.getText(window, 'Додати замітку', 'Назва замітки')
     if note_name and ok:
         lst_notes.addItem(note_name)
         notes[note_name] = {'текст': '', 'теги': ''}
-
         write_file()
 
 btn_create_notes.clicked.connect(add_note)
@@ -100,6 +99,52 @@ def del_note():
 
     write_file()
 
+def add_tag():
+    key = lst_notes.currentItem().text()
+    tag = line_edit.text()
+
+    if tag:
+        notes[key]['теги'].append(tag)
+        tag_notes.addItem(tag)
+        line_edit.clear()
+        write_file()
+
+def del_tag():
+    key = lst_notes.currentItem().text()
+    tag = tag_notes.currentItem()
+
+    if tag:
+        notes[key]['теги'].remove(tag.text())
+        tag_notes.takeItem(tag_notes.row(tag))
+        write_file()
+
+def search_tag():
+    tag = file_text.text()
+
+    if 'Шукати за тегом' == btn_search_tag.text():
+        filter_notes = {}
+
+        for key in notes:
+            if tag in notes[key]['теги']:
+                filter_notes[key] = notes[key]
+        btn_search_tag.setText('Скинути пошук')
+        lst_notes.clear()
+        lst_notes.addItems(filter_notes)
+        lst_tags.clear()
+        file_text.clear()
+
+    elif 'Скинути пошук' == btn_search_tag.text():
+        btn_search_tag.setText('Шукати за тегом')
+
+        lst_notes.clear()
+        lst_notes.addItems(notes)
+        lst_tags.clear()
+        file_text.clear()
+
+btn_add_tag.clicked.connect(add_tag)
+btn_search_tag.clicked.connect(search_tag)
+btn_unpin_tag.clicked.connect(del_tag)
+
 btn_delete_notes.clicked.connect(del_note)
 
 def save_notes():
@@ -108,17 +153,17 @@ def save_notes():
 
         notes[key]['текст'] = file_text.toPlainText()
 
-        write_file()
+
 
 btn_save_notes.clicked.connect(save_notes)
 
+#def saveToFile():
 with open("notes.json", 'r', encoding="utf8") as file:
     notes = json.load(file)
 
 
 lst_notes.addItems(notes)
 lst_notes.clicked.connect(show_notes)
-
 
 
 window.setLayout(layout_notes)
