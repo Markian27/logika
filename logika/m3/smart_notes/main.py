@@ -104,6 +104,7 @@ def save_notes():
         key = lst_notes.currentItem().text()
 
         notes[key]['текст'] = file_text.toPlainText()
+        write_file()
 
 def add_tag():
     key = lst_notes.currentItem().text()
@@ -125,7 +126,7 @@ def del_tag():
         write_file()
 
 def search_tag():
-    tag = file_text.text()
+    tag = line_edit.text()
 
     if 'Шукати за тегом' == btn_search_tag.text():
         filter_notes = {}
