@@ -82,7 +82,7 @@ def add_note():
     note_name, ok = QInputDialog.getText(window, 'Додати замітку', 'Назва замітки')
     if note_name and ok:
         lst_notes.addItem(note_name)
-        notes[note_name] = {'текст': '', 'теги': ''}
+        notes[note_name] = {'текст': '', 'теги': ['']}
         write_file()
 
 btn_create_notes.clicked.connect(add_note)
@@ -98,6 +98,12 @@ def del_note():
     lst_notes.addItems(notes)
 
     write_file()
+
+def save_notes():
+    if lst_notes.currentItem():
+        key = lst_notes.currentItem().text()
+
+        notes[key]['текст'] = file_text.toPlainText()
 
 def add_tag():
     key = lst_notes.currentItem().text()
@@ -147,17 +153,9 @@ btn_unpin_tag.clicked.connect(del_tag)
 
 btn_delete_notes.clicked.connect(del_note)
 
-def save_notes():
-    if lst_notes.currentItem():
-        key = lst_notes.currentItem().text()
-
-        notes[key]['текст'] = file_text.toPlainText()
-
-
 
 btn_save_notes.clicked.connect(save_notes)
 
-#def saveToFile():
 with open("notes.json", 'r', encoding="utf8") as file:
     notes = json.load(file)
 
