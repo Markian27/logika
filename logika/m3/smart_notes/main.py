@@ -82,7 +82,7 @@ def add_note():
     note_name, ok = QInputDialog.getText(window, 'Додати замітку', 'Назва замітки')
     if note_name and ok:
         lst_notes.addItem(note_name)
-        notes[note_name] = {'текст': '', 'теги': ['']}
+        notes[note_name] = {'текст': '', 'теги': []}
         write_file()
 
 btn_create_notes.clicked.connect(add_note)
@@ -105,7 +105,6 @@ def save_notes():
 
         notes[key]['текст'] = file_text.toPlainText()
         write_file()
-
 def add_tag():
     key = lst_notes.currentItem().text()
     tag = line_edit.text()
