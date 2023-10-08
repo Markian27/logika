@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import (
     QApplication, QWidget, QTextEdit, QLabel,
     QListWidget, QPushButton, QLineEdit, QHBoxLayout, QVBoxLayout, QInputDialog,
     QTableWidget,  QListWidgetItem, QFormLayout,
-    QGroupBox, QButtonGroup, QRadioButton, QSpinBox)
-
+    QGroupBox, QButtonGroup, QRadioButton, QSpinBox, QMainWindow, QShortcut)
+from PyQt5.QtGui import QKeySequence
 
 def write_file():
     with open('notes.json', 'w', encoding='utf8') as file:
@@ -163,6 +163,21 @@ with open("notes.json", 'r', encoding="utf8") as file:
 lst_notes.addItems(notes)
 lst_notes.clicked.connect(show_notes)
 
+class Mykeys(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        shortcut = QShortcut(QKeySequence('Ctrl+Z'), self)
+        shortcut.activated.connect(self.save)
+
+    def save(self):
+        if lst_notes.currentItem():
+            key = lst_notes.currentItem().text()
+
+            notes[key]['текст'] = file_text.toPlainText()
+            write_file()
 
 window.setLayout(layout_notes)
 window.setLayout(line1)
