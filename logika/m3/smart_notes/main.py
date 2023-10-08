@@ -46,7 +46,6 @@ line_x0.addWidget(id_notes)
 lst_notes = QListWidget()
 line_x1.addWidget(lst_notes)
 
-
 btn_create_notes = QPushButton('Створити замітку')
 line_x2.addWidget(btn_create_notes)
 btn_delete_notes = QPushButton('Видалити замітку')
@@ -153,7 +152,6 @@ btn_unpin_tag.clicked.connect(del_tag)
 
 btn_delete_notes.clicked.connect(del_note)
 
-
 btn_save_notes.clicked.connect(save_notes)
 
 with open("notes.json", 'r', encoding="utf8") as file:
@@ -163,21 +161,14 @@ with open("notes.json", 'r', encoding="utf8") as file:
 lst_notes.addItems(notes)
 lst_notes.clicked.connect(show_notes)
 
-class Mykeys(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.initUI()
+shortcut = QShortcut(QKeySequence('Ctrl+S'), window)
+shortcut.activated.connect(save_notes)
 
-    def initUI(self):
-        shortcut = QShortcut(QKeySequence('Ctrl+Z'), self)
-        shortcut.activated.connect(self.save)
+shortcut = QShortcut(QKeySequence('Ctrl+A'), window)
+shortcut.activated.connect(add_note)
 
-    def save(self):
-        if lst_notes.currentItem():
-            key = lst_notes.currentItem().text()
-
-            notes[key]['текст'] = file_text.toPlainText()
-            write_file()
+shortcut = QShortcut(QKeySequence('Ctrl+D'), window)
+shortcut.activated.connect(del_note)
 
 window.setLayout(layout_notes)
 window.setLayout(line1)
