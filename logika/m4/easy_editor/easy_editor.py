@@ -57,8 +57,20 @@ print(filter(files_and_folders))
 
 window.setLayout(line_x1)
 
-window.setStyleSheet("QListWidget { background-color:"
+List.setStyleSheet("QListWidget { background-color:"
                      " #f2edc4; color: black; font-size: 16px; border-radius: 1px; }")
+folder.setStyleSheet("QPushButton { background-color:"
+                     " #ede393; color: black; font-size: 16px; border-radius: 1px; }")
+BMW.setStyleSheet("QPushButton { background-color:"
+                     " #505052; color: white; font-size: 16px; border-radius: 1px; }")
+left.setStyleSheet("QPushButton { background-color:"
+                     " #de5252; color: black; font-size: 16px; border-radius: 1px; }")
+right.setStyleSheet("QPushButton { background-color:"
+                     " #de5252; color: black; font-size: 16px; border-radius: 1px; }")
+sharpness.setStyleSheet("QPushButton { background-color:"
+                     " #c9c7c7; color: black; font-size: 16px; border-radius: 1px; }")
+mirror.setStyleSheet("QPushButton { background-color:"
+                     " #8dd6d5; color: black; font-size: 16px; border-radius: 1px; }")
 
 
 window.show()
