@@ -57,5 +57,9 @@ print(filter(files_and_folders))
 
 window.setLayout(line_x1)
 
+window.setStyleSheet("QListWidget { background-color:"
+                     " #f2edc4; color: black; font-size: 16px; border-radius: 1px; }")
+
+
 window.show()
 app.exec_()
