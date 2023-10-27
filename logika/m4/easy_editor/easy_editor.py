@@ -88,7 +88,8 @@ workimage = ImageProcessor()
 def showChosenImage():
     filename = List.currentItem().text()
     full_path = os.path.join(workdir, filename)
-    workimage.loadImage(filename)
+    workimage.loadImage(full_path)
+    workimage.showImage(full_path)
 
 
 window.setLayout(line_x1)
