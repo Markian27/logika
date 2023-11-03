@@ -84,11 +84,45 @@ class ImageProcessor():
         lb_pic.setPixmap(pixmapimg)
         lb_pic.show()
 
+    def SaveAndShowImage(self):
+        path = os.path.join(workdir, self.save_dir)
+
+        if not (os.path.exists(path) or os.path.isdir(path)):
+            os.mkdir(path)
+
+        image_path = os.path.join(path, self.filename)
+
+        self.original.save(image_path)
+        self.showImage(image_path)
+
+    def doBW(self):
+        self.original = self.original.convert("L")
+        self.SaveAndShowImage()
+
+    def Left(self):
+        self.original = self.original.transpose(Image.ROTATE_90)
+        self.SaveAndShowImage()
+
+    def Right(self):
+        self.original = self.original.transpose(Image.ROTATE_270)
+        self.SaveAndShowImage()
+
+    def do_flip(self):
+        self.original = self.original.transpose(Image.FLIP_LEFT_RIGHT)
+        self.SaveAndShowImage()
+
+    def Sharp(self):
+        self.original = self.original.filter(ImageFilter.SHARPEN)
+        self.SaveAndShowImage()
+
+
+
+
 workimage = ImageProcessor()
 def showChosenImage():
     filename = List.currentItem().text()
     full_path = os.path.join(workdir, filename)
-    workimage.loadImage(full_path)
+    workimage.loadImage(filename)
     workimage.showImage(full_path)
 
 window.setLayout(line_x1)
@@ -111,6 +145,12 @@ sharpness.setStyleSheet("QPushButton { background-color:"
 mirror.setStyleSheet("QPushButton { background-color:"
                      " #8dd6d5; color: black; font-size: 16px; border-radius: 1px; }")
 
+BMW.clicked.connect(workimage.doBW)
+sharpness.clicked.connect(workimage.do_flip)
+mirror.clicked.connect(workimage.do_flip)
+sharpness.clicked.connect(workimage.Sharp)
+left.clicked.connect(workimage.Left)
+right.clicked.connect(workimage.Right)
 
 
 window.show()
