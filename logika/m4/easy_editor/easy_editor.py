@@ -91,7 +91,6 @@ def showChosenImage():
     workimage.loadImage(full_path)
     workimage.showImage(full_path)
 
-
 window.setLayout(line_x1)
 
 List.itemClicked.connect(showChosenImage)
