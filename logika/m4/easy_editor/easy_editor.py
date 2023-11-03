@@ -146,7 +146,6 @@ mirror.setStyleSheet("QPushButton { background-color:"
                      " #8dd6d5; color: black; font-size: 16px; border-radius: 1px; }")
 
 BMW.clicked.connect(workimage.doBW)
-sharpness.clicked.connect(workimage.do_flip)
 mirror.clicked.connect(workimage.do_flip)
 sharpness.clicked.connect(workimage.Sharp)
 left.clicked.connect(workimage.Left)
