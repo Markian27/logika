@@ -42,33 +42,55 @@ line1.addWidget(file_text)
 
 id_notes = QLabel('Список заміток ')
 line_x0.addWidget(id_notes)
+id_notes.setStyleSheet("QLabel { background-color:"
+                     " #CCDCF2; color: black; font-size: 16px; border-radius: 1px; }")
 
 lst_notes = QListWidget()
 line_x1.addWidget(lst_notes)
+lst_notes.setStyleSheet("QListWidget { background-color:"
+                     " #CCDCF2; color: black; font-size: 16px; border-radius: 1px; }")
 
 btn_create_notes = QPushButton('Створити замітку')
+btn_create_notes.setStyleSheet("QPushButton { background-color:"
+                     " #CCDCF2; color: black; font-size: 16px; border-radius: 1px; }")
 line_x2.addWidget(btn_create_notes)
 btn_delete_notes = QPushButton('Видалити замітку')
+btn_delete_notes.setStyleSheet("QPushButton { background-color:"
+                     " #CCDCF2; color: black; font-size: 16px; border-radius: 1px; }")
 line_x2.addWidget(btn_delete_notes)
 btn_save_notes = QPushButton('Зберегти замітку')
+btn_save_notes.setStyleSheet("QPushButton { background-color:"
+                     " #CCDCF2; color: black; font-size: 16px; border-radius: 1px; }")
 line_x3.addWidget(btn_save_notes)
 
 
 lst_tags = QLabel('Список тегів ')
 line_x4.addWidget(lst_tags)
+lst_tags.setStyleSheet("QLabel { background-color:"
+                     " #ede393; color: black; font-size: 16px; border-radius: 1px; }")
 
 tag_notes = QListWidget()
 line_x5.addWidget(tag_notes)
+tag_notes.setStyleSheet("QListWidget { background-color:"
+                     " #ede393; color: black; font-size: 16px; border-radius: 1px; }")
 
 line_edit = QLineEdit()
 line_x6.addWidget(line_edit)
+line_edit.setStyleSheet("QLineEdit { background-color:"
+                     " #ede393; color: black; font-size: 16px; border-radius: 1px; }")
 
 btn_add_tag = QPushButton('Додати тег')
 line_x8.addWidget(btn_add_tag)
+btn_add_tag.setStyleSheet("QPushButton { background-color:"
+                     " #ede393; color: black; font-size: 16px; border-radius: 1px; }")
 btn_unpin_tag = QPushButton('Відкріпити тег')
+btn_unpin_tag.setStyleSheet("QPushButton { background-color:"
+                     " #ede393; color: black; font-size: 16px; border-radius: 1px; }")
 line_x8.addWidget(btn_unpin_tag)
 btn_search_tag = QPushButton('Шукати за тегом')
 line_x7.addWidget(btn_search_tag)
+btn_search_tag.setStyleSheet("QPushButton { background-color:"
+                     " #ede393; color: black; font-size: 16px; border-radius: 1px; }")
 
 def show_notes():
     key = lst_notes.selectedItems()[0].text()
